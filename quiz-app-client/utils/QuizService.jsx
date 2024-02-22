@@ -44,7 +44,25 @@ export const getSubjects = async() => {
 
 export const updateQuestion = async (id, question) => {
     try {
-        const response = await api.put(`/question/${id}/update`)
+        const response = await api.put(`/question/${id}/update`, question)
+        return response.data
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const getQuestionById = async (id) => {
+    try {
+        const response = await api.get(`/question/${id}`)
+        return response.data
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const deleteQuestion = async (id) => {
+    try {
+        const response = await api.delete(`/question/${id}`)
         return response.data
     } catch (error) {
         console.error(error)
