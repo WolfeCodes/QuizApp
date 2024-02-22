@@ -21,3 +21,32 @@ export const getAllQuestions = async() => {
         console.error(error)
     }
 }
+
+export const fetchQuizForUser = async(number, subject) => {
+    try {
+        const response = await api.get(`/quiz/fetch-questions-for-user?numOfQuestions=${number}&subject=${subject}`)
+        return response.data
+        
+    } catch (error) {
+        console.error(error)
+        return []
+    }
+}
+
+export const getSubjects = async() => {
+    try {
+        const response = await api.get("/subjects")
+        return response.data
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const updateQuestion = async (id, question) => {
+    try {
+        const response = await api.put(`/question/${id}/update`)
+        return response.data
+    } catch (error) {
+        console.error(error)
+    }
+}
