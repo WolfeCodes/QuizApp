@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createQuestion, getSubjects } from "../../utils/QuizService";
 import { i } from "vite/dist/node/types.d-jgA8ss1A";
 
@@ -10,6 +10,10 @@ const AddQuestion = () => {
   const [subject, setSubject] = useState("");
   const [newSubject, setNewSubject] = useState("");
   const [subjectOptions, setSubjectOptions] = useState([""]);
+
+useEffect(() => {
+    fetchSubjects()
+},[])
 
   const fetchSubjects = async () => {
     try {
@@ -44,7 +48,7 @@ const AddQuestion = () => {
     );
   };
 
-  const handleCorrectAnswer = () => {
+  const handleAddCorrectAnswer = () => {
     setCorrectAnswers([...correctAnswers, ""]);
   };
 
@@ -243,8 +247,24 @@ const AddQuestion = () => {
                         )}
                       </div>
                     ))}
+                    <button
+                    type="button"
+                    className="btn btn-outline-info"
+                    onClick={handleAddCorrectAnswer}
+                    >
+                        Add Correct Answer
+                    </button>
                   </div>
                 )}
+                {!correctAnswers.length && <p>Please choose at least one correct answer</p> }
+                <div className="btn-group">
+                    <button type="submit" className="btn btn-outline-success mr-2">
+                        Save Question 
+                    </button>
+                    {/* <Link to={""} className="btn btn-outline-success mr-2">
+                        Save Question 
+                    </Link> */}
+                </div>
               </form>
             </div>
           </div>
