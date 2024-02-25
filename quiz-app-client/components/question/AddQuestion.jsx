@@ -156,6 +156,28 @@ const handleAddSubject = () => {
                             <option value={"multiple"}>Multiple Answers</option>
                             </select>
                             </div>
+                            <div className='mb-3 '>
+                                <label htmlFor='choices' className='form-label text-info'>
+                                Choices
+                                </label>
+                                {choices.map((choice, index) => (
+                                    <div key={index} className='input-group mb-3'>
+                                        <input
+                                        type='text'
+                                        value={choice}
+                                        onChange={(e) => handleChoiceChange(index, e.target.value)}
+                                        className='form-control'
+                                        />
+                                        <button
+                                        type='button'
+                                        onClick={() => handleRemoveChoice(index)}
+                                        className='btn btn-outline-danger btn-sm'>
+                                            Remove
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+
                         </form>
                     </div>
                 </div>
