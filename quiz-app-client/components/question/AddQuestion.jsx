@@ -111,8 +111,31 @@ const handleAddSubject = () => {
                                 </select>
 
                             </div>
+                            {subject === "New" && (
+                                <div className='mb-3 '>
+                                    <label htmlFor='new-subject' className='form--label text-info'>
+                                        Add a new Subject
+                                    </label>
+                                    <input
+                                    type='text'
+                                    id='new-subject'
+                                    value={newSubject}
+                                    onChange={(e) => setNewSubject(e.target.value)}
+                                    className='form--control'
+                                    />
+                                    <button
+                                    type='button'
+                                    className='btn btn-outline-primary btn-sm mt-2'
+                                    onClick={handleAddSubject}>
+                                    Add Subject
+                                    </button>
+
+                                </div>
+                            )}
 
                             
+
+
 
                         </form>
 
