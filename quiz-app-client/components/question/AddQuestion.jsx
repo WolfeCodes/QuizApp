@@ -132,13 +132,31 @@ const handleAddSubject = () => {
 
                                 </div>
                             )}
-
-                            
-
-
-
+                            <div className='mb-2 '>
+                                <label htmlFor='question' className='form-label text-info'>
+                                Question
+                                </label>
+                                <textarea
+                                className='form-control'
+                                rows={4}
+                                value={question}
+                                onChange={(e) => setQuestion(e.target.value)}
+                                >
+                                </textarea>
+                            </div>
+                            <div className='mb-3 '>
+                            <label htmlFor='question-type' className='form-label text-info'>
+                                Question Type
+                            </label>
+                            <select className='form-control'
+                            id='question'
+                            value={questionType}
+                            onChange={(e) => setQuestionType(e.target.value)}>
+                            <option value={"single"}>Single Answer</option>
+                            <option value={"multiple"}>Multiple Answers</option>
+                            </select>
+                            </div>
                         </form>
-
                     </div>
                 </div>
 
