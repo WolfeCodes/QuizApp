@@ -58,6 +58,14 @@ useEffect(() => {
                         <li key={index}>{choice}</li>
                     ))}
                 </ul>
+                <p className='text-success'>Correct Answer: {question.correctAnswers}</p>
+                <div className='btn-group mb-4'>
+                    {/* Todo: add link to update question form */}
+                    <button className='btn btn-outline-danger btn-sm'
+                    onClick={() => handleDelete(question.id)}>
+                        Delete Question 
+                    </button>
+                </div>
             </div>
         ))}
     </section>
