@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { getAllQuestions } from '../../utils/QuizService'
+import { deleteQuestion, getAllQuestions } from '../../utils/QuizService'
 
 const GetAllQuiz = () => {
-    const[question, setQuestion] = useState([{id: "", question: "", correctAnswers: "", choices: []}])
+    const[questions, setQuestions] = useState([{id: "", question: "", correctAnswers: "", choices: []}])
     const[isLoading, setIsLoading] = useState(true)
     const[isQuestionDeleted, setIsQuestionDeleted] = useState(false)
     const[deleteSuccessMessage, setDeleteSuccessMessage] = useState("")
@@ -14,15 +14,31 @@ useEffect(() => {
     const fetchAllQuestions = async() => {
         try {
             const data = await getAllQuestions()
-            setQuestion(data)
+            setQuestions(data)
             setIsLoading(false)
         } catch (error) {
             console.error(error)
         }
     }
+    const handleDelete = async(id) => {
+        try {
+            await deleteQuestion(id)
+            setQuestions(questions.filter((question) => question.id != id))
+            setIsQuestionDeleted(true)
+            setDeleteSuccessMessage("Question deleted successfully!")
+        } catch (error) {
+            console.error(error)
+        }
+        setTimeout(() => {
+            setDeleteSuccessMessage("")
+        }, 4000)
+    }
+    if(isLoading){
+        return <div>Loading</div>
+    }
   return (
     <div>
-
+        
     </div>
   )
 }
