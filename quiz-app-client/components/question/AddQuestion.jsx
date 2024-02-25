@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {getSubjects} from '../../utils/QuizService'
+import {createQuestion, getSubjects} from '../../utils/QuizService'
 import { i } from 'vite/dist/node/types.d-jgA8ss1A';
 
 const AddQuestion = () => {
@@ -60,12 +60,26 @@ const handleSubmit = async(e) => {
                 const choiceIndex = choiceLetter.charCodeAt(0) - 65
                 return choiceIndex >= 0 && choiceIndex < choices.length ? choiceLetter : null
 
-            })
+            }),
+            subject
         }
+        await createQuestion(result)
+        setQuestion("")
+        setQuestionType("single")
+        setChoices([""])
+        setCorrectAnswers([""])
+        setSubject("")
     } catch (error) {
         return console.log(error)
-        
     }
+}
+
+const handleAddSubject = () => {
+    if(newSubject.trim() !== ""){{
+        setSubject(newSubject.trim())
+        setSubjectOptions([...subjectOptions, newSubject.trim()])
+        setNewSubject("")
+    }}
 }
 
   return (
