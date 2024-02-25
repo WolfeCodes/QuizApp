@@ -83,8 +83,46 @@ const handleAddSubject = () => {
 }
 
   return (
-    <div>
-        AddQuestion
+    <div className='container'>
+        <div className='row justify-contentt-center'>
+            <div className='col-md--6 mt-5'>
+                <div className='card'>
+                    <div className='card-header'>
+                        <h5 className='card-title'>Add New Question</h5>
+                    </div>
+                    <div className='card-body'>
+                        <form onSubmit={handleSubmit} className='p-2'>
+                            <div className='mb-3'>
+                                <label htmlFor='subject' className='form-label text-info'>
+                                    Select a Subject
+                                </label>
+                                <select
+                                id='subject'
+                                value={subject}
+                                onChange={(e) => setSubject(e.target.value)}
+                                className='form-control'>
+                                    <option value={""}>Select a Subject</option>
+                                    <option value={"New"}>Add New Subject</option>
+                                    {subjectOptions.map((option) => (
+                                        <option key={option} value={option}>
+                                            {option}
+                                        </option>
+                                    ))}
+                                </select>
+
+                            </div>
+
+                            
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        
     </div>
   )
 }
