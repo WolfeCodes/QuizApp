@@ -29,7 +29,30 @@ const AnswerOptions = ({
         ))}
       </div>
     );
-    
-  }};
+
+  } else if(question === "multiple"){
+    return(
+        <div>
+            <p>Select all that apply:</p>
+            {choices.sort().map((choice, index) => (
+          <div key={choice} className="form-check mb-3">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              id={choice}
+              value={choice}
+              name={question.id}
+              checked={isChecked(question.id, choice)}
+              onChange={() => handleCheckboxChange(id, choice)}
+            />
+            <label className="form-check-label ms-2">{choice}</label>
+          </div>
+        ))}
+        </div>
+    )
+  }else {
+    return null
+  }
+};
 
 export default AnswerOptions;
