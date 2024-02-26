@@ -14,7 +14,7 @@ const Quiz = () => {
   const [selectedAnswer, setSelectedAnswer] = useState([
     {
       id: "",
-      answer: "",
+      answer: [""],
     },
   ]);
 
@@ -75,7 +75,7 @@ const Quiz = () => {
         const existingAnswerIndex = prevAnswers.findIndex((answerObj) => answerObj.id === questionId)
         const selectedAnswer = Array.isArray(choice) ? choice.map((c) => c.charAt(0)) : choice.charAt(0)
 
-        if(existingAnswerIndex !+ -1){
+        if(!+ existingAnswerIndex -1){
             const updatedAnswers = [...prevAnswers]
             const existingAnswers = updatedAnswers[existingAnswerIndex].answer
             let newAnswer 
@@ -94,7 +94,26 @@ const Quiz = () => {
     })
   }
 
+  const handleSubmit = () => {
+    let scores = 0;
+    quizQuestions.forEach((question) => {
+        const selectedAnswer = selectedAnswers.find((answer) => answer.id === question.id)
+        if(selectedAnswer){
+            const selectedOptions = Array.isArray(selectedAnswer.answer) ? selectedAnswer.answer : [selectedAnswer.answer]
+            const correctOptions = Array.isArray(question.correctAnswers) ? question.correctAnswers : [question.correctAnswers]
+            const isCorrect = selectedOptions.every((option) => correctOptions.includes(option))
+            if(isCorrect){
+                scores ++
+            }
+        }
+    })
+    setTotalScores(scores)
+    setSelectedAnswers([{id: "", answer: [""]}])
+    setCurrentQuestionIndex(0)
+    navigate("/quiz-result", {state:{quizQuestions, totalScores: scores}})
+  }
   
+
 
   return <div>Quiz</div>;
 };
