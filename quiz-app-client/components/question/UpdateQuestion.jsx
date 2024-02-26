@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { getQuestionById } from "../../utils/QuizService";
 import { useParams } from "react-router-dom";
@@ -9,6 +9,10 @@ const UpdateQuestion = () => {
   const [correctAnswers, setCorrectAnswers] = useState([""]);
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+
+useEffect(() => {
+    fetchQuestion()
+}, [])
 
   const fetchQuestion = async () => {
     try {
@@ -95,6 +99,15 @@ const UpdateQuestion = () => {
                 onChange={handleCorrectAnswerChange}
               />
           </div>
+          <div className="btn-group">
+            <button type="submit" className="btn btn-sm btn-outline-warning">
+                Update Question 
+            </button>
+            {/* Todo: Link back to all questions */}
+
+          </div>
+
+
         </form>
       </div>
     </section>
